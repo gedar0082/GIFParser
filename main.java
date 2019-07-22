@@ -9,11 +9,12 @@ public class main {
     static final  String bmpname2 = "C:\\Users\\gedar\\git\\GIFParserPorject\\res\\bmp1.bmp";
     public static void main(String[] args) throws IOException {
 
+        BMPReader reader = new BMPReader();
+        BMPStruct struct = reader.reading(bmpname1);
 
-        BMPStruct bmp = new BMPStruct();
-        bmp.reading(bmpname1);
-        GIFReader read = new GIFReader();
-        read.gifReader(fileName);
+        GIFWriter writer = new GIFWriter();
+        writer.compressedColors(struct.colors);
+
         LZWCoding a = new LZWCoding();
         //a.filling("0A B2 5D 0A B2 5D 0A B2 5D 0A B2 5D F3 ED 63 F3 ED 63 F3 ED 63 F3 ED 63 00 80 C8 00 80 C8 00 80 C8 00 80 C8 F1 60 22 F1 60 22 F1 60 22 F1 60 22");
         System.out.println(a.decoder());

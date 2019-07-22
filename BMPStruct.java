@@ -1,50 +1,50 @@
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 
-public class BMPStruct {
-    void reading(String filename){
-        File file = new File(filename);
-        byte[] data = new byte[(int) file.length()];
-        try{
-            FileInputStream fileReader = new FileInputStream(file);
-            int buffersize = 64000;
-            byte[] buffer = new byte[64000];
-            while (fileReader.available() > 0){
-                if(fileReader.available() < 64000) buffersize = fileReader.available();
-                fileReader.read(buffer, 0, buffersize);
-                for(int i = 0; i == 0; i--) {
-                    if (data[i] > 0) System.out.print(i + " ");
-                }
-            }
-            fileReader.close();
+class BMPStruct {
 
-        }catch(Exception ex){
-            System.out.print(ex.getMessage());
-        }
+        ArrayList<Byte> bfType = new ArrayList<>();
+        ArrayList<Byte> bfSize = new ArrayList<>();
+        ArrayList<Byte> bfReserved1 = new ArrayList<>();
+        ArrayList<Byte> bfReserved2 = new ArrayList<>();
+        ArrayList<Byte> bfOffBits = new ArrayList<>();
 
-        int BHType;
-        long BHSize;
-        int BHReserved1;
-        int BHReserved2;
-        long BHOffBits;
+        ArrayList<Byte> bcSize = new ArrayList<>();
+        ArrayList<Byte> bcWidth = new ArrayList<>();
+        ArrayList<Byte> bcHeight = new ArrayList<>();
+        ArrayList<Byte> bcPlanes = new ArrayList<>();
+        ArrayList<Byte> bcBitCount = new ArrayList<>();
 
-        int BMPSize;
-        int BMPWidth;
-        int BMPHeight;
-        short BMPPlanes;
-        short BMPBitCount;
-        int BMPCompression;
-        int BMPSizeImage;
-        int BMPXPelsPerMeter;
-        int BMPYPelsPerMeter;
-        int BMPClrUsed;
-        int BMPClrImportant;
+        ArrayList<Byte> biSize = new ArrayList<>();
+        ArrayList<Byte> biWidth = new ArrayList<>();
+        ArrayList<Byte> biHeight = new ArrayList<>();
+        ArrayList<Byte> biPlanes = new ArrayList<>();
+        ArrayList<Byte> biBitCount = new ArrayList<>();
+        ArrayList<Byte> biCompression = new ArrayList<>();
+        ArrayList<Byte> biSizeImage = new ArrayList<>();
+        ArrayList<Byte> biXPelsPerMeter = new ArrayList<>();
+        ArrayList<Byte> biYPelsPerMeter = new ArrayList<>();
+        ArrayList<Byte> biClrUsed = new ArrayList<>();
+        ArrayList<Byte> biClrImportant = new ArrayList<>();
 
-        int blue;
-        int green;
-        int red;
+        ArrayList<Byte> bV4RedMask = new ArrayList<>();
+        ArrayList<Byte> bV4GreenMask = new ArrayList<>();
+        ArrayList<Byte> bV4BlueMask = new ArrayList<>();
+        ArrayList<Byte> bV4AlphaMask = new ArrayList<>();
+        ArrayList<Byte> bV4CSType = new ArrayList<>();
+        ArrayList<Byte> bV4Endpoints = new ArrayList<>();
+        ArrayList<Byte> bV4GammaRed = new ArrayList<>();
+        ArrayList<Byte> bV4GammaGreen = new ArrayList<>();
+        ArrayList<Byte> bV4GammaBlue = new ArrayList<>();
+
+        ArrayList<Byte> bV5Intent = new ArrayList<>();
+        ArrayList<Byte> bV5ProfileData = new ArrayList<>();
+        ArrayList<Byte> bV5ProfileSize = new ArrayList<>();
+        ArrayList<Byte> bV5Reserved = new ArrayList<>();
+
+        ArrayList<ArrayList<Integer>> colors = new ArrayList<>();
 
 
 
-    }
 }

@@ -1,10 +1,4 @@
-import com.sun.javafx.iio.gif.GIFDescriptor;
-import com.sun.xml.internal.bind.v2.TODO;
-import sun.awt.image.GifImageDecoder;
-
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,24 +14,18 @@ public class GIFReader {
             int i = -1;
             while ((i = file.read()) != -1) {
                 readedGIF.add(i);
-              //System.out.print(i + " ");
-              //System.out.print(String.format("%02X", i) + " ");
-              //System.out.println((byte)i);
             }
         } catch (IOException ex) {
             System.out.printf(ex.getMessage());
+            System.out.printf("suka");
         }
         GIFStruct.struct.setHeader(getname());
         GIFStruct.struct.setImageSize(gifSize());
         GIFStruct.struct.setGlobColorChart(dictionary());
         System.out.println(GIFStruct.struct.getGlobColorChart());
 
-      //System.out.println(readedGIF);
-      //System.out.println(getname());
-      //System.out.println(gifSize());
 
         counter+=3;//reserved for screen descriptor;
-     // System.out.println(dictionary());
         ArrayList<ArrayList<Integer>> imcode = new ArrayList<>();
         System.out.println(counter);
         System.out.println(readFrom(33));
@@ -48,6 +36,9 @@ public class GIFReader {
         imcode.add(readFrom(44));
         //System.out.println(readFrom(44));
         GIFStruct.struct.setImageCode(imcode);
+
+        LZWCoding lzw = new LZWCoding();
+        lzw.decoder();
 
     }
 

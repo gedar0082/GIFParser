@@ -7,9 +7,14 @@ import java.util.ArrayList;
 
 public class BMPWriter {
     static int count = 0;
-    void writer() throws IOException {
+    static int size;
+
+    void writer(String name) throws IOException {
+        GIFReader read = new GIFReader();
+//        read.gifReader(name);
+        size = GIFStruct.struct.getImageCode().size();
         //bmpheader
-        FileOutputStream file = new FileOutputStream("bmp" + count + ".bmp");
+        FileOutputStream file = new FileOutputStream("bmpp" + count + ".bmp");
 /*00*/  file.write(0x42);
         file.write(0x4d);
         file.write(0x00);
@@ -47,6 +52,7 @@ public class BMPWriter {
 /*7E*/  file.write(strToINt("00000000").getBytes(StandardCharsets.ISO_8859_1));  //ProfileData
 /*82*/  file.write(strToINt("00000000").getBytes(StandardCharsets.ISO_8859_1));  //ProfileSize. if ProfileData = 0 - unnecessary
 /*86*/  file.write(strToINt("00000000").getBytes(StandardCharsets.ISO_8859_1));  //reserved, must be null
+
         String g = GIFStruct.struct.getDecodedImages().get(count).replace(" ", "");
         String a;
         String b;

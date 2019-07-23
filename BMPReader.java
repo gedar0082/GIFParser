@@ -3,9 +3,11 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class BMPReader {
+class BMPReader {
+    //ArrayList<ArrayList<Byte>> globalDictionary = new ArrayList<>();
     private static int count = 0;
     BMPStruct reading(String filename) {
+
         File file = new File(filename);
         byte[] data = new byte[(int) file.length()];
         try {
@@ -18,135 +20,92 @@ public class BMPReader {
         }
         BMPStruct struct = new BMPStruct();
 
-        struct.bfType.addAll(reader2b(data));
-        struct.bfSize.addAll(reader4b(data));
-        struct.bfReserved1.addAll(reader2b(data));
-        struct.bfReserved2.addAll(reader2b(data));
-        struct.bfOffBits.addAll(reader4b(data));
+        struct.bfType = Arrays.copyOf(byteReader2(data), 2);
+        struct.bfSize = Arrays.copyOf(byteReader4(data), 4);
+        struct.bfReserved1 = Arrays.copyOf(byteReader2(data), 2);
+        struct.bfReserved2 = Arrays.copyOf(byteReader2(data), 2);
+        struct.bfOffBits = Arrays.copyOf(byteReader4(data), 4);
 
         if (data[14] == 12) {
-            struct.bcSize.addAll(reader4b(data));
-            struct.bcWidth.addAll(reader2b(data));
-            struct.bcHeight.addAll(reader2b(data));
-            struct.bcPlanes.addAll(reader2b(data));
-            struct.bcBitCount.addAll(reader2b(data));
+            struct.bcSize = Arrays.copyOf(byteReader4(data), 4);
+            struct.bcWidth = Arrays.copyOf(byteReader2(data), 2);
+            struct.bcHeight = Arrays.copyOf(byteReader2(data), 2);
+            struct.bcPlanes = Arrays.copyOf(byteReader2(data), 2);
+            struct.bcBitCount = Arrays.copyOf(byteReader2(data), 2);
         }else {
             if(data[14] >= 40) {
-                struct.biSize.addAll(reader4b(data));
-                struct.biWidth.addAll(reader4b(data));
-                struct.biHeight.addAll(reader4b(data));
-                struct.biPlanes.addAll(reader2b(data));
-                struct.biBitCount.addAll(reader2b(data));
-                struct.biCompression.addAll(reader4b(data));
-                struct.biSizeImage.addAll(reader4b(data));
-                struct.biXPelsPerMeter.addAll(reader4b(data));
-                struct.biYPelsPerMeter.addAll(reader4b(data));
-                struct.biClrUsed.addAll(reader4b(data));
-                struct.biClrImportant.addAll(reader4b(data));
+                struct.biSize = Arrays.copyOf(byteReader4(data), 4);
+                struct.biWidth = Arrays.copyOf(byteReader4(data), 4);
+                struct.biHeight = Arrays.copyOf(byteReader4(data), 4);
+                struct.biPlanes = Arrays.copyOf(byteReader2(data), 2);
+                struct.biBitCount = Arrays.copyOf(byteReader2(data), 2);
+                struct.biCompression = Arrays.copyOf(byteReader4(data), 4);
+                struct.biSizeImage = Arrays.copyOf(byteReader4(data), 4);
+                struct.biXPelsPerMeter = Arrays.copyOf(byteReader4(data), 4);
+                struct.biYPelsPerMeter = Arrays.copyOf(byteReader4(data), 4);
+                struct.biClrUsed = Arrays.copyOf(byteReader4(data), 4);
+                struct.biClrImportant = Arrays.copyOf(byteReader4(data), 4);
                 if(data[14] >=108) {
-                    struct.bV4RedMask.addAll(reader4b(data));
-                    struct.bV4GreenMask.addAll(reader4b(data));
-                    struct.bV4BlueMask.addAll(reader4b(data));
-                    struct.bV4AlphaMask.addAll(reader4b(data));
-                    struct.bV4CSType.addAll(reader4b(data));
+                    struct.bV4RedMask = Arrays.copyOf(byteReader4(data), 4);
+                    struct.bV4GreenMask = Arrays.copyOf(byteReader4(data), 4);
+                    struct.bV4BlueMask = Arrays.copyOf(byteReader4(data), 4);
+                    struct.bV4AlphaMask = Arrays.copyOf(byteReader4(data), 4);
+                    struct.bV4CSType = Arrays.copyOf(byteReader4(data), 4);
 
-                    struct.bV4Endpoints.addAll(reader4b(data));
-                    struct.bV4Endpoints.addAll(reader4b(data));
-                    struct.bV4Endpoints.addAll(reader4b(data));
-                    struct.bV4Endpoints.addAll(reader4b(data));
-                    struct.bV4Endpoints.addAll(reader4b(data));
-                    struct.bV4Endpoints.addAll(reader4b(data));
-                    struct.bV4Endpoints.addAll(reader4b(data));
-                    struct.bV4Endpoints.addAll(reader4b(data));
-                    struct.bV4Endpoints.addAll(reader4b(data));
+                    struct.bV4Endpoints = Arrays.copyOf(byteReader4(data), 4);
+                    struct.bV4Endpoints = Arrays.copyOf(byteReader4(data), 4);
+                    struct.bV4Endpoints = Arrays.copyOf(byteReader4(data), 4);
+                    struct.bV4Endpoints = Arrays.copyOf(byteReader4(data), 4);
+                    struct.bV4Endpoints = Arrays.copyOf(byteReader4(data), 4);
+                    struct.bV4Endpoints = Arrays.copyOf(byteReader4(data), 4);
+                    struct.bV4Endpoints = Arrays.copyOf(byteReader4(data), 4);
+                    struct.bV4Endpoints = Arrays.copyOf(byteReader4(data), 4);
+                    struct.bV4Endpoints = Arrays.copyOf(byteReader4(data), 4);
 
-                    struct.bV4GammaRed.addAll(reader4b(data));
-                    struct.bV4GammaGreen.addAll(reader4b(data));
-                    struct.bV4GammaBlue.addAll(reader4b(data));
+                    struct.bV4GammaRed = Arrays.copyOf(byteReader4(data), 4);
+                    struct.bV4GammaGreen = Arrays.copyOf(byteReader4(data), 4);
+                    struct.bV4GammaBlue = Arrays.copyOf(byteReader4(data), 4);
                     if(data[14] >= 124) {
-                        struct.bV5Intent.addAll(reader4b(data));
-                        struct.bV5ProfileData.addAll(reader4b(data));
-                        struct.bV5ProfileSize.addAll(reader4b(data));
-                        struct.bV5Reserved.addAll(reader4b(data));
+                        struct.bV5Intent = Arrays.copyOf(byteReader4(data), 4);
+                        struct.bV5ProfileData = Arrays.copyOf(byteReader4(data), 4);
+                        struct.bV5ProfileSize = Arrays.copyOf(byteReader4(data), 4);
+                        struct.bV5Reserved = Arrays.copyOf(byteReader4(data), 4);
                     }
                 }
             }
         }
+        //для унификации переделать на нахождение размера, если это 1б поля
+
+
         while (count < data.length){
-            struct.colors.add(reader3b(data));
+            ArrayList<Byte> array = new ArrayList<>();
+            array.add(data[count + 2]);
+            array.add(data[count + 1]);
+            array.add(data[count]);
+            struct.colors.add(array);
+            count+=3;
         }
-        for(int i = 0; i < bigByteToInt(struct.bcHeight); i++){
-            for (int j = 0; j < bigByteToInt(struct.bcWidth); j++){
-
-            }
-        }
+        count = 0;
         return struct;
-        /**ПЕРЕДЕЛАТЬ**/
     }
 
-    ArrayList<Byte> reader2b (byte[] data){
-        ArrayList<Byte> array = new ArrayList<>();
-        array.add(new Byte(data[count]));
-        array.add(new Byte(data[count + 1]));
+    private byte[] byteReader2(byte[] data){
+        byte[] reader = new byte[2];
+        reader[0] = data[count];
+        reader[1] = data[count + 1];
         count+=2;
-        return array;
+        return reader;
     }
 
-
-    ArrayList<Byte> reader4b (byte[] data){
-        ArrayList<Byte> array = new ArrayList<>();
-        array.add(new Byte(data[count]));
-        array.add(new Byte(data[count + 1]));
-        array.add(new Byte(data[count + 2]));
-        array.add(new Byte(data[count + 3]));
+    private byte[] byteReader4(byte[] data){
+        byte[] reader = new byte[4];
+        reader[0] = data[count];
+        reader[1] = data[count + 1];
+        reader[2] = data[count + 2];
+        reader[3] = data[count + 3];
         count+=4;
-        return array;
+        return reader;
     }
-
-    ArrayList<Integer> reader3b (byte[] data){
-        ArrayList<Integer> array = new ArrayList<>();
-
-        if((int)data[count] < 0) array.add((data[count] + 255));
-        else array.add((int)(data[count]));
-
-        if((int)data[count + 1] < 0) array.add((data[count + 1] + 255));
-        else array.add((int)(data[count + 1]));
-
-        if((int)data[count + 2] < 0) array.add((data[count + 2] + 255));
-        else array.add((int)(data[count + 2]));
-
-        count+=3;
-        return array;
-    }
-
-    int bigIntToInt(ArrayList<Integer> arr){
-        int i = 0;
-        for (int j = 0; j < arr.size(); j++){
-            i += additor(additor(arr.get(i))) * (int)Math.pow(255, i);
-        }
-        return i;
-    }
-
-    int bigByteToInt(ArrayList<Byte> arr){
-        int i = 0;
-        for (int j = 0; j < arr.size(); j++){
-            i += additor(additor((int)arr.get(i))) * (int)Math.pow(255, i);
-        }
-        return i;
-    }
-
-    int additor(int b){
-        int i = 0;
-        if((int)b < 0){
-            i = i + b + 255;
-            return  i;
-        }
-        else{
-            i = b;
-            return i;
-        }
-    }
-
 
 
 

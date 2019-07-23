@@ -2,25 +2,26 @@ import java.util.ArrayList;
 
 public class LZWCoding {
 
-    private String testDict = "0A B2 5D 0A B2 5D 0A B2 5D 0A B2 5D F3 ED 63 F3 ED 63 F3 ED 63 F3 ED 63 00 80 C8 00 80 C8 00 80 C8 00 80 C8 F1 60 22 F1 60 22 F1 60 22 F1 60 22";
-
-    private ArrayList<Integer> poses = new ArrayList<>();
+    //private String testDict = "0A B2 5D 0A B2 5D 0A B2 5D 0A B2 5D F3 ED 63 F3 ED 63 F3 ED 63 F3 ED 63 00 80 C8 00 80 C8 00 80 C8 00 80 C8 F1 60 22 F1 60 22 F1 60 22 F1 60 22";
 
 
 
-    void filling(String st){
+
+
+
+    ArrayList<Integer> filling(ArrayList<String> dict, String text){
+        ArrayList<Integer> poses = new ArrayList<>();
+        ArrayList<String> dictionary = new ArrayList<>(dict);
+        dictionary.add("CC");
+        dictionary.add("EOI");
+        poses.add(dictionary.indexOf("CC"));
+        String codedString = text;
         String P = "";
         String C;
         String PC;
-        int position = 0;
-        ArrayList<String> dictionary = new ArrayList<>();
-        for (int i = 0; i < (int)(st.length() / 9) + 1; i++){
-            dictionary.add(st.substring(position, position + 8));
-            position+=9;
-        }
-        for (int i = 0; i < testDict.length(); i++){
-            C = testDict.substring(0, 8);
-            testDict = testDict.substring(9);
+        for (int i = 0; i < codedString.length(); i++){
+            C = codedString.substring(0, 8);
+            codedString = codedString.substring(9);
             if (P.equals("")){
                 PC = C;
             }else{
@@ -31,17 +32,17 @@ public class LZWCoding {
                 dictionary.add(PC);
                 poses.add(dictionary.indexOf(P));
                 P = C;
-                if(i == testDict.length() - 1){
+                if(i == codedString.length() - 1){
                       poses.add(dictionary.indexOf(C));
                 }
             }
         }
-        System.out.println(" ");
-        System.out.println("dictionary " + dictionary);
-        System.out.println("poses " + poses);
+        poses.add(dictionary.indexOf("EOI"));
+        return poses;
     }
 
-@SuppressWarnings("unchecked")
+
+    @SuppressWarnings("unchecked")
     ArrayList<String> decoder(){
 
         ArrayList<String> colorpalet = new ArrayList<>();
@@ -57,7 +58,6 @@ public class LZWCoding {
             StringBuilder newstr = new StringBuilder();
             poses.subList(0, 12).clear();
             String f = arrToReversBinStr(poses);
-            //decodeDict.clear();
 
             int buffer = (int)(Math.log(decodeDict.size())/Math.log(2)) + 1;
 

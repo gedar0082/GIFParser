@@ -4,46 +4,46 @@ import java.util.ArrayList;
 
 class BMPStruct {
 
-        ArrayList<Byte> bfType = new ArrayList<>();
-        ArrayList<Byte> bfSize = new ArrayList<>();
-        ArrayList<Byte> bfReserved1 = new ArrayList<>();
-        ArrayList<Byte> bfReserved2 = new ArrayList<>();
-        ArrayList<Byte> bfOffBits = new ArrayList<>();
+        byte[] bfType = new byte[2];
+        byte[] bfSize = new byte[4];
+        byte[] bfReserved1 = new byte[2];
+        byte[] bfReserved2 = new byte[2];
+        byte[] bfOffBits = new byte[4];
 
-        ArrayList<Byte> bcSize = new ArrayList<>();
-        ArrayList<Byte> bcWidth = new ArrayList<>();
-        ArrayList<Byte> bcHeight = new ArrayList<>();
-        ArrayList<Byte> bcPlanes = new ArrayList<>();
-        ArrayList<Byte> bcBitCount = new ArrayList<>();
+        byte[] bcSize = new byte[4];
+        byte[] bcWidth = new byte[2];
+        byte[] bcHeight = new byte[2];
+        byte[] bcPlanes = new byte[2];
+        byte[] bcBitCount = new byte[2];
 
-        ArrayList<Byte> biSize = new ArrayList<>();
-        ArrayList<Byte> biWidth = new ArrayList<>();
-        ArrayList<Byte> biHeight = new ArrayList<>();
-        ArrayList<Byte> biPlanes = new ArrayList<>();
-        ArrayList<Byte> biBitCount = new ArrayList<>();
-        ArrayList<Byte> biCompression = new ArrayList<>();
-        ArrayList<Byte> biSizeImage = new ArrayList<>();
-        ArrayList<Byte> biXPelsPerMeter = new ArrayList<>();
-        ArrayList<Byte> biYPelsPerMeter = new ArrayList<>();
-        ArrayList<Byte> biClrUsed = new ArrayList<>();
-        ArrayList<Byte> biClrImportant = new ArrayList<>();
+        byte[] biSize = new byte[4];
+        byte[] biWidth = new byte[4];
+        byte[] biHeight = new byte[4];
+        byte[] biPlanes = new byte[2];
+        byte[] biBitCount = new byte[2];
+        byte[] biCompression = new byte[4];
+        byte[] biSizeImage = new byte[4];
+        byte[] biXPelsPerMeter = new byte[4];
+        byte[] biYPelsPerMeter = new byte[4];
+        byte[] biClrUsed = new byte[4];
+        byte[] biClrImportant = new byte[4];
 
-        ArrayList<Byte> bV4RedMask = new ArrayList<>();
-        ArrayList<Byte> bV4GreenMask = new ArrayList<>();
-        ArrayList<Byte> bV4BlueMask = new ArrayList<>();
-        ArrayList<Byte> bV4AlphaMask = new ArrayList<>();
-        ArrayList<Byte> bV4CSType = new ArrayList<>();
-        ArrayList<Byte> bV4Endpoints = new ArrayList<>();
-        ArrayList<Byte> bV4GammaRed = new ArrayList<>();
-        ArrayList<Byte> bV4GammaGreen = new ArrayList<>();
-        ArrayList<Byte> bV4GammaBlue = new ArrayList<>();
+        byte[] bV4RedMask = new byte[4];
+        byte[] bV4GreenMask = new byte[4];
+        byte[] bV4BlueMask = new byte[4];
+        byte[] bV4AlphaMask = new byte[4];
+        byte[] bV4CSType = new byte[4];
+        byte[] bV4Endpoints = new byte[36];
+        byte[] bV4GammaRed = new byte[4];
+        byte[] bV4GammaGreen = new byte[4];
+        byte[] bV4GammaBlue = new byte[4];
 
-        ArrayList<Byte> bV5Intent = new ArrayList<>();
-        ArrayList<Byte> bV5ProfileData = new ArrayList<>();
-        ArrayList<Byte> bV5ProfileSize = new ArrayList<>();
-        ArrayList<Byte> bV5Reserved = new ArrayList<>();
+        byte[] bV5Intent = new byte[4];
+        byte[] bV5ProfileData = new byte[4];
+        byte[] bV5ProfileSize = new byte[4];
+        byte[] bV5Reserved = new byte[4];
 
-        ArrayList<ArrayList<Integer>> colors = new ArrayList<>();
+        ArrayList<ArrayList<Byte>> colors = new ArrayList<>();
 
 
 

@@ -1,31 +1,30 @@
-import com.sun.imageio.plugins.gif.GIFImageReader;
-import com.sun.javafx.iio.gif.GIFDescriptor;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class main {
     static final  String fileName = "C:\\Users\\gedar\\git\\GIFParserPorject\\res\\gif.gif";
     static final  String bmpname1 = "C:\\Users\\gedar\\git\\GIFParserPorject\\res\\bmp0.bmp";
     static final  String bmpname2 = "C:\\Users\\gedar\\git\\GIFParserPorject\\res\\bmp1.bmp";
     public static void main(String[] args) throws IOException {
+        ArrayList<String> names = new ArrayList<>();
+        names.add(bmpname1);
+        names.add(bmpname2);
 
-        BMPReader reader = new BMPReader();
-        BMPStruct struct = reader.reading(bmpname1);
+        //BMPReader reader = new BMPReader();
+        //BMPStruct st = reader.reading(bmpname1);
 
         GIFWriter writer = new GIFWriter();
-        writer.compressedColors(struct.colors);
+        writer.write(names);
 
-        LZWCoding a = new LZWCoding();
-        //a.filling("0A B2 5D 0A B2 5D 0A B2 5D 0A B2 5D F3 ED 63 F3 ED 63 F3 ED 63 F3 ED 63 00 80 C8 00 80 C8 00 80 C8 00 80 C8 F1 60 22 F1 60 22 F1 60 22 F1 60 22");
-        System.out.println(a.decoder());
-        System.out.println("GCC " + GIFStruct.struct.getGlobColorChart());
-        System.out.println("IC " + GIFStruct.struct.getImageCode());
-        System.out.println("EC " + GIFStruct.struct.getExpansionCode());
-        System.out.println("H " + GIFStruct.struct.getHeader());
-        System.out.println("IS " + GIFStruct.struct.getImageSize());
-        BMPWriter d = new BMPWriter();
-        for(int i = 0; i < GIFStruct.struct.getImageCode().size(); i++){
-            d.writer();
+        BMPWriter w = new BMPWriter();
+
+
+        GIFReader r = new GIFReader();
+        r.gifReader(fileName);
+
+        for(int i = 0; i < 2; i++){
+            w.writer(fileName);
         }
     }
 }
